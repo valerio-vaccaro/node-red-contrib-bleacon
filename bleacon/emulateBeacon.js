@@ -1,7 +1,7 @@
 /**
- * scanBeacon.js
- * Scans for a iBeacons
- * Countinuously returns the found beacosn
+ * emulateBeacon.js
+ * Emulate an iBeacons
+ * Countinuously emulate a beacon
  * Requires Bleacon: https://github.com/sandeepmistry/node-bleacon
  * Copyright 2015 Valerio Vaccaro - www.valeriovaccaro.it
  *
