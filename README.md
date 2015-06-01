@@ -1,8 +1,15 @@
 # node-red-contrib-bleacon
 
 ## Install
-npm install node-red-contrib-bleacon
+```bash
+npm install node-red-contrib-bleacon 
+```
 
+or 
+
+```bash
+npm install node-red-contrib-bleacon -g 
+```
 ## Usage example
 ![Basic usage](https://github.com/valerio-vaccaro/node-red-contrib-bleacon/blob/master/node-red-contrib-bleacon_example.png)
 
