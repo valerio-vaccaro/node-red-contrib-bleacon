@@ -61,7 +61,7 @@ function BeaconScan(n) {
     });
 
     this.on("close", function() {
-        try { Bleacon.stopScanning(); }
+        try { Bleacon.stopAdvertising(); }
         catch (err) { console.log(err); }
     });
 }

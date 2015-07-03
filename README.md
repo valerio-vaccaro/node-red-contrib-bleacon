@@ -167,6 +167,7 @@ Simple usage of the plugin in Node-RED, a message with ON or 1 will turn on the 
 Tried on another device??? Let me know ;)
 
 ## History
+- 0.0.3 - July 2015 : Solved error on emulation node exit 
 - 0.0.2 - June 2015 : Minor bugfixes
 - 0.0.1 - April 2015 : Initial Release
 

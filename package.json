@@ -1,12 +1,12 @@
 {
     "name"         : "node-red-contrib-bleacon",
-    "version"      : "0.0.2",
+    "version"      : "0.0.3",
     "description"  : "iBeacon emulator and scanner nodes for node-red",
     "author"       : "Valerio Vaccaro <valerio.vaccaro@gmail.com>",
-    "dependencies": { 
+    "dependencies": {
          "bleacon" : "latest"
     },
-    "repository"   : { 
+    "repository"   : {
          "type"    : "git",
          "url"     : "https://github.com/valerio-vaccaro/node-red-contrib-bleacon"
     },
