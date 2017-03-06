@@ -18,81 +18,112 @@
  * limitations under the License.
  **/
 
-var RED = require(process.env.NODE_RED_HOME+"/red/red");
+module.exports = function(RED) {
+  var Bleacon = require('bleacon');
 
-var Bleacon = require('bleacon');
-
-function BeaconScan(n) {
-    RED.nodes.createNode(this,n);
+  function BeaconScan(n) {
+    RED.nodes.createNode(this, n);
 
     var msg = {};
     var beacon_uuid;
-	var beacon_major;
-	var beacon_minor;
+    var beacon_major;
+    var beacon_minor;
     var node = this;
 
     // Get varables from the node
     this.beacon_uuid = n.beacon_uuid;
     this.beacon_major = n.beacon_major;
-	this.beacon_minor = n.beacon_minor;
-    
-    // Status icon
-    this.status({fill:"grey",shape:"dot",text:"not scanning"});
+    this.beacon_minor = n.beacon_minor;
 
-    this.on("input", function(msg){ 
-		if(msg.payload=="on" || msg.payload==1){
-			if((this.beacon_uuid!="")&&(this.beacon_major!="")&&(this.beacon_minor!="")){
-				try { 
-                    Bleacon.startScanning(this.beacon_uuid, this.beacon_major, this.beacon_minor); 
-                    this.status({fill:"blue",shape:"dot",text:"scanning"});
-                }
-			    catch (err) { console.log(err); }    
-			}
-			else if((this.beacon_uuid!="")&&(this.beacon_major!="")){
-				try { 
-                    Bleacon.startScanning(this.beacon_uuid, this.beacon_major); 
-                    this.status({fill:"blue",shape:"dot",text:"scanning"});;
-                }
-			    catch (err) { console.log(err); }
-			}
-			else if(this.beacon_uuid!=""){
-				try { 
-                    Bleacon.startScanning(this.beacon_uuid); 
-                    this.status({fill:"blue",shape:"dot",text:"scanning"});
-                }
-			    catch (err) { console.log(err); }
-			}
-			else{
-				try { 
-                    Bleacon.startScanning(); 
-                    this.status({fill:"blue",shape:"dot",text:"scanning"});
-                }
-			    catch (err) { console.log(err); }
-			}
-		}
-		else{
-			try { 
-                Bleacon.stopScanning(); 
-                this.status({fill:"grey",shape:"dot",text:"not scanning"});
-            }
-			catch (err) { console.log(err); }
-		}
+    // Status icon
+    this.status({
+      fill: "grey",
+      shape: "dot",
+      text: "not scanning"
     });
 
-	Bleacon.on('discover', function(bleacon) {
-		msg = {};
-        msg.topic = node.topic;
-        msg.payload = JSON.stringify(bleacon);
-        node.send(msg);
-	});
+    this.on("input", function(msg) {
+      if (msg.payload == "on" || msg.payload == 1) {
+        if ((this.beacon_uuid != "") && (this.beacon_major != "") && (
+            this.beacon_minor !=
+            "")) {
+          try {
+            Bleacon.startScanning(this.beacon_uuid, this.beacon_major,
+              this.beacon_minor);
+            this.status({
+              fill: "blue",
+              shape: "dot",
+              text: "scanning"
+            });
+          } catch (err) {
+            console.log(err);
+          }
+        } else if ((this.beacon_uuid != "") && (this.beacon_major != "")) {
+          try {
+            Bleacon.startScanning(this.beacon_uuid, this.beacon_major);
+            this.status({
+              fill: "blue",
+              shape: "dot",
+              text: "scanning"
+            });;
+          } catch (err) {
+            console.log(err);
+          }
+        } else if (this.beacon_uuid != "") {
+          try {
+            Bleacon.startScanning(this.beacon_uuid);
+            this.status({
+              fill: "blue",
+              shape: "dot",
+              text: "scanning"
+            });
+          } catch (err) {
+            console.log(err);
+          }
+        } else {
+          try {
+            Bleacon.startScanning();
+            this.status({
+              fill: "blue",
+              shape: "dot",
+              text: "scanning"
+            });
+          } catch (err) {
+            console.log(err);
+          }
+        }
+      } else {
+        try {
+          Bleacon.stopScanning();
+          this.status({
+            fill: "grey",
+            shape: "dot",
+            text: "not scanning"
+          });
+        } catch (err) {
+          console.log(err);
+        }
+      }
+    });
+
+    Bleacon.on('discover', function(bleacon) {
+      msg = {};
+      msg.topic = node.topic;
+      msg.payload = JSON.stringify(bleacon);
+      node.send(msg);
+    });
 
 
     this.on("close", function() {
-        try { Bleacon.stopScanning(); }
-        catch (err) { console.log(err); }
+      try {
+        Bleacon.stopScanning();
+      } catch (err) {
+        console.log(err);
+      }
     });
-}
+  }
 
-// Register the node by name. This must be called before overriding any of the
-// Node functions.
-RED.nodes.registerType("scanBeacon", BeaconScan);
+  // Register the node by name. This must be called before overriding any of the
+  // Node functions.
+  RED.nodes.registerType("scanBeacon", BeaconScan);
+}

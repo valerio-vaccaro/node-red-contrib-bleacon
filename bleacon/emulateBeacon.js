@@ -18,54 +18,73 @@
  * limitations under the License.
  **/
 
-var RED = require(process.env.NODE_RED_HOME+"/red/red");
+module.exports = function(RED) {
+  var Bleacon = require('bleacon');
 
-var Bleacon = require('bleacon');
-
-function BeaconScan(n) {
-    RED.nodes.createNode(this,n);
+  function BeaconScan(n) {
+    RED.nodes.createNode(this, n);
 
     var msg = {};
     var beacon_uuid;
-	var beacon_major;
-	var beacon_minor;
+    var beacon_major;
+    var beacon_minor;
     var beacon_power
     var node = this;
 
     // Get varables from the node
     this.beacon_uuid = n.beacon_uuid;
     this.beacon_major = n.beacon_major;
-	this.beacon_minor = n.beacon_minor;
+    this.beacon_minor = n.beacon_minor;
     this.beacon_power = n.beacon_power;
-    
-    // Status icon
-    this.status({fill:"grey",shape:"dot",text:"not sending"});
 
-    this.on("input", function(msg){ 
-		if(msg.payload=="on" || msg.payload==1){
-			if((this.beacon_uuid!="")&&(this.beacon_major!="")&&(this.beacon_minor!="")&&(this.beacon_power!="")){
-				try { 
-                    Bleacon.startAdvertising(this.beacon_uuid, this.beacon_major, this.beacon_minor, this.beacon_power);
-                    this.status({fill:"blue",shape:"dot",text:"sending"});
-                }
-			    catch (err) { console.log(err); }    
-			}
-		}
-		else{
-			try { 
-                Bleacon.stopAdvertising(); 
-                this.status({fill:"grey",shape:"dot",text:"not sending"});
-            }
-			catch (err) { console.log(err); }
-		}
+    // Status icon
+    this.status({
+      fill: "grey",
+      shape: "dot",
+      text: "not sending"
+    });
+
+    this.on("input", function(msg) {
+      if (msg.payload == "on" || msg.payload == 1) {
+        if ((this.beacon_uuid != "") && (this.beacon_major != "") && (
+            this.beacon_minor !=
+            "") && (this.beacon_power != "")) {
+          try {
+            Bleacon.startAdvertising(this.beacon_uuid, this.beacon_major,
+              this.beacon_minor, this.beacon_power);
+            this.status({
+              fill: "blue",
+              shape: "dot",
+              text: "sending"
+            });
+          } catch (err) {
+            console.log(err);
+          }
+        }
+      } else {
+        try {
+          Bleacon.stopAdvertising();
+          this.status({
+            fill: "grey",
+            shape: "dot",
+            text: "not sending"
+          });
+        } catch (err) {
+          console.log(err);
+        }
+      }
     });
 
     this.on("close", function() {
-        try { Bleacon.stopAdvertising(); }
-        catch (err) { console.log(err); }
+      try {
+        Bleacon.stopAdvertising();
+      } catch (err) {
+        console.log(err);
+      }
     });
-}
+  }
 
-// Register the node by name. This must be called before overriding any of the
-// Node functions.
-RED.nodes.registerType("emulateBeacon", BeaconScan);
+  // Register the node by name. This must be called before overriding any of the
+  // Node functions.
+  RED.nodes.registerType("emulateBeacon", BeaconScan);
+}

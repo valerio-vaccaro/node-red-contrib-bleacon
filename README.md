@@ -4,11 +4,11 @@ A collection of [Node-RED](http://nodered.org) nodes to read and emulate iBeacon
 ## Install
 Use npm to command to install this package locally in the Node-RED modules directory
 ```bash
-npm install node-red-contrib-bleacon 
+npm install node-red-contrib-bleacon
 ```
 or install in it globally with the command
 ```bash
-npm install node-red-contrib-bleacon -g 
+npm install node-red-contrib-bleacon -g
 ```
 
 ## Nodes included in the package
@@ -158,16 +158,17 @@ Simple usage of the plugin in Node-RED, a message with ON or 1 will turn on the 
 ]
 ```
 
-## Tested devices 
+## Tested devices
 
 | Vendor                                               | ID        | Working | Note                                                 |
 |------------------------------------------------------|-----------|---------|------------------------------------------------------|
-| Cambridge Silicon Radio, Ltd Bluetooth Dongle        | 0a12:0001 | YES     |                                                      | 
+| Cambridge Silicon Radio, Ltd Bluetooth Dongle        | 0a12:0001 | YES     |                                                      |
 
 Tried on another device??? Let me know ;)
 
 ## History
-- 0.0.3 - July 2015 : Solved error on emulation node exit 
+- 0.0.4 - March 2017 : Solved some minor warnings
+- 0.0.3 - July 2015 : Solved error on emulation node exit
 - 0.0.2 - June 2015 : Minor bugfixes
 - 0.0.1 - April 2015 : Initial Release
 
@@ -175,7 +176,7 @@ Tried on another device??? Let me know ;)
 * Valerio Vaccaro (https://github.com/valerio-vaccaro)
 
 ## Credits
-Node-RED has been made possible by the hard work of Nick O'Leary @knolleary and Dave Conway-Jones @ceejay at IBM Emerging Technology. Much thanks to them and other supporters for advancing this platform. 
+Node-RED has been made possible by the hard work of Nick O'Leary @knolleary and Dave Conway-Jones @ceejay at IBM Emerging Technology. Much thanks to them and other supporters for advancing this platform.
 These nodes use the Sandeep Mistry @sandeepmistry library Bleacon, thanks for your work also.
 This module is developed by Valerio Vaccaro (http://www.valeriovaccaro.it) on Raspberry Pi embedded board.
 
