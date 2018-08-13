@@ -28,12 +28,14 @@ module.exports = function(RED) {
     var beacon_uuid;
     var beacon_major;
     var beacon_minor;
+    var to_json;
     var node = this;
 
     // Get varables from the node
     this.beacon_uuid = n.beacon_uuid;
     this.beacon_major = n.beacon_major;
     this.beacon_minor = n.beacon_minor;
+    this.to_json = n.to_json;
 
     // Status icon
     this.status({
@@ -109,7 +111,8 @@ module.exports = function(RED) {
     Bleacon.on('discover', function(bleacon) {
       msg = {};
       msg.topic = node.topic;
-      msg.payload = JSON.stringify(bleacon);
+      if (this.to_json) msg.payload = JSON.stringify(bleacon);
+      else msg.payload = bleacon;
       node.send(msg);
     });
 

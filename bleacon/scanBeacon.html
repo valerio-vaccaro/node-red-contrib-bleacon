@@ -12,8 +12,6 @@
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   See the License for the specific language governing permissions and
   limitations under the License.
-
-
 -->
 
 <script type="text/x-red" data-template-name="scanBeacon">
@@ -31,6 +29,12 @@
         <label for="node-input-topic"><i class="fa fa-tag"></i> Minor</label>
         <input type="text" id="node-input-beacon_minor" placeholder="0">
     </div>
+
+    <div class="form-row">
+        <label for="node-input-topic"><i class="fa fa-tag"></i>Converts JSON to a string?</label>
+        <input type="checkbox" id="node-input-to_json" checked>
+    </div>
+
 
     <div class="form-row">
         <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
@@ -64,6 +68,10 @@
             },
             beacon_minor: {
                 value: "",
+                required: false
+            },
+            to_json: {
+                value: true,
                 required: false
             }
         },
