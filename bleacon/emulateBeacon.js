@@ -19,7 +19,7 @@
  **/
 
 module.exports = function(RED) {
-  var Bleacon = require('bleacon');
+  var Bleacon = require('bleacon-fork');
 
   function BeaconScan(n) {
     RED.nodes.createNode(this, n);
