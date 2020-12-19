@@ -4,11 +4,11 @@ A collection of [Node-RED](http://nodered.org) nodes to read and emulate iBeacon
 ## Install
 Use npm to command to install this package locally in the Node-RED modules directory
 ```bash
-npm install node-red-contrib-bleacon
+npm install node-red-contrib-bleacon --unsafe-perm
 ```
 or install in it globally with the command
 ```bash
-npm install node-red-contrib-bleacon -g
+npm install node-red-contrib-bleacon -g --unsafe-perm
 ```
 
 ## Nodes included in the package
